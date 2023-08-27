@@ -69,7 +69,7 @@ def FetchName(id):
 def StartSelenium():
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
-    options.add_argument('headless')
+    #options.add_argument('headless')
     global driver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
@@ -84,7 +84,7 @@ def FetchImageUrl(targetUrl, IsLast = False):
     # Connect to hitomi.la
         driver.get(targetUrl)
     # Wait until the page Initialize
-        ImageEle = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, """//*[@id="comicImages"]/picture/img""")))
+        ImageEle = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "lillie")))
 
     # Find Image Url
         ImageLink = ImageEle.get_attribute("src")
@@ -141,7 +141,7 @@ def BackgroundDownload(id, Mname, picCount):
             DownloadImage(ImageUrl, referalUrl, id, i + 1, Mname)
         elif i + 1 == picCount:
             DownloadImage(ImageUrl, referalUrl, id, i + 1, Mname)
-            os.system("osascript -e \'Tell application \"System Events\" to display dialog \"Finished Downloading: " + Mname + "\" with title \"Hitomi Downloader\"\'")
+            #os.system("osascript -e \'Tell application \"System Events\" to display dialog \"Finished Downloading: " + Mname + "\" with title \"Hitomi Downloader\"\'")
             StopSelenium()
 
     
