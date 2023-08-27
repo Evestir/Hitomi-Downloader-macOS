@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF09734B2A999FEA0035FDE9 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09734A2A999FEA0035FDE9 /* UpdateManager.swift */; };
+		CF09734D2A99AAA90035FDE9 /* UI-Manipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09734C2A99AAA90035FDE9 /* UI-Manipulation.swift */; };
+		CF0973502A9A4A750035FDE9 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = CF09734F2A9A4A750035FDE9 /* PopupView */; };
+		CF1714B22A9B5CBE00A2BB3A /* DownBtnOld.riv in Resources */ = {isa = PBXBuildFile; fileRef = CF1714B02A9B5CBE00A2BB3A /* DownBtnOld.riv */; };
+		CF1714B52A9B610500A2BB3A /* downBtn.riv in Resources */ = {isa = PBXBuildFile; fileRef = CF1714B42A9B610500A2BB3A /* downBtn.riv */; };
 		CF9476AC2A8A08EA003BEA9B /* HitomiDownloaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9476AB2A8A08EA003BEA9B /* HitomiDownloaderApp.swift */; };
 		CF9476AE2A8A08EA003BEA9B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9476AD2A8A08EA003BEA9B /* ContentView.swift */; };
 		CF9476B02A8A08EB003BEA9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF9476AF2A8A08EB003BEA9B /* Assets.xcassets */; };
@@ -38,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF09734A2A999FEA0035FDE9 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
+		CF09734C2A99AAA90035FDE9 /* UI-Manipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI-Manipulation.swift"; sourceTree = "<group>"; };
+		CF1714B02A9B5CBE00A2BB3A /* DownBtnOld.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = DownBtnOld.riv; sourceTree = "<group>"; };
+		CF1714B42A9B610500A2BB3A /* downBtn.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = downBtn.riv; sourceTree = "<group>"; };
 		CF9476A82A8A08EA003BEA9B /* HitomiDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitomiDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9476AB2A8A08EA003BEA9B /* HitomiDownloaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitomiDownloaderApp.swift; sourceTree = "<group>"; };
 		CF9476AD2A8A08EA003BEA9B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0973502A9A4A750035FDE9 /* PopupView in Frameworks */,
 				CFB7DE8D2A8B9EFF009B466F /* FileWatcher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF1714AF2A9B5CBE00A2BB3A /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				CF1714B42A9B610500A2BB3A /* downBtn.riv */,
+				CF1714B02A9B5CBE00A2BB3A /* DownBtnOld.riv */,
+			);
+			path = RiveAssets;
+			sourceTree = "<group>";
+		};
 		CF94769F2A8A08EA003BEA9B = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +122,7 @@
 		CF9476AA2A8A08EA003BEA9B /* HitomiDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				CF1714AF2A9B5CBE00A2BB3A /* RiveAssets */,
 				CFA733412A8A25BD003F925E /* node.py */,
 				CFA733432A8A2604003F925E /* Node.swift */,
 				CFFCA4072A8C8A2200E05120 /* GalleryManager.swift */,
@@ -111,6 +131,8 @@
 				CF9476AF2A8A08EB003BEA9B /* Assets.xcassets */,
 				CF9476B42A8A08EB003BEA9B /* HitomiDownloader.entitlements */,
 				CF9476B12A8A08EB003BEA9B /* Preview Content */,
+				CF09734A2A999FEA0035FDE9 /* UpdateManager.swift */,
+				CF09734C2A99AAA90035FDE9 /* UI-Manipulation.swift */,
 			);
 			path = HitomiDownloader;
 			sourceTree = "<group>";
@@ -158,6 +180,7 @@
 			name = HitomiDownloader;
 			packageProductDependencies = (
 				CFB7DE8C2A8B9EFF009B466F /* FileWatcher */,
+				CF09734F2A9A4A750035FDE9 /* PopupView */,
 			);
 			productName = HitomiDownloader;
 			productReference = CF9476A82A8A08EA003BEA9B /* HitomiDownloader.app */;
@@ -233,6 +256,7 @@
 			mainGroup = CF94769F2A8A08EA003BEA9B;
 			packageReferences = (
 				CFB7DE8B2A8B9EFF009B466F /* XCRemoteSwiftPackageReference "FileWatcher" */,
+				CF09734E2A9A4A750035FDE9 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = CF9476A92A8A08EA003BEA9B /* Products */;
 			projectDirPath = "";
@@ -250,9 +274,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF1714B22A9B5CBE00A2BB3A /* DownBtnOld.riv in Resources */,
 				CFA733422A8A25BD003F925E /* node.py in Resources */,
 				CF9476B32A8A08EB003BEA9B /* Preview Assets.xcassets in Resources */,
 				CF9476B02A8A08EB003BEA9B /* Assets.xcassets in Resources */,
+				CF1714B52A9B610500A2BB3A /* downBtn.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +306,8 @@
 				CFA733442A8A2604003F925E /* Node.swift in Sources */,
 				CF9476AE2A8A08EA003BEA9B /* ContentView.swift in Sources */,
 				CFFCA4082A8C8A2200E05120 /* GalleryManager.swift in Sources */,
+				CF09734B2A999FEA0035FDE9 /* UpdateManager.swift in Sources */,
+				CF09734D2A99AAA90035FDE9 /* UI-Manipulation.swift in Sources */,
 				CF9476AC2A8A08EA003BEA9B /* HitomiDownloaderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +463,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = HitomiDownloader/HitomiDownloader.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -443,12 +473,14 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = vesit.HitomiDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -461,7 +493,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = HitomiDownloader/HitomiDownloader.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -469,12 +503,14 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = vesit.HitomiDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -592,6 +628,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CF09734E2A9A4A750035FDE9 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CFB7DE8B2A8B9EFF009B466F /* XCRemoteSwiftPackageReference "FileWatcher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eonist/FileWatcher.git";
@@ -603,6 +647,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CF09734F2A9A4A750035FDE9 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF09734E2A9A4A750035FDE9 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
 		CFB7DE8C2A8B9EFF009B466F /* FileWatcher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFB7DE8B2A8B9EFF009B466F /* XCRemoteSwiftPackageReference "FileWatcher" */;

@@ -56,10 +56,16 @@ extension URL {
     }
 }
 
+func fileExists(atPath path: String) -> Bool {
+    let fileManager = FileManager.default
+    return fileManager.fileExists(atPath: path)
+}
+
 func RunPy(id:String) {
     let task = Process()
     task.executableURL = URL(fileURLWithPath: "/opt/homebrew/bin/python3") // Path to the Python interpreter
-    task.arguments = ["/Users/vesitte/Desktop/HitomiDownloader/HitomiDownloader/node.py", id] // Path to your Python script
+    
+    task.arguments = [picturesDirectoryPath()+"/Hitomi/node.py", id] // Path to your Python script
     
     do {
         try task.run()

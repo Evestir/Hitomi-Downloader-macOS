@@ -26,7 +26,6 @@ func removeDirectory(atPath path: URL) {
 
 func GetAttr(url: URL) -> Gallery {
     do {
-        
         let JsonPath = URL(fileURLWithPath: url.path + "/gallery.json")
         let Json = try Data(contentsOf: JsonPath)
         

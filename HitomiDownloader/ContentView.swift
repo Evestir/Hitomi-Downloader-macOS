@@ -1,65 +1,89 @@
 import SwiftUI
 import Foundation
+import PopupView
 
 struct ContentView: View {
     @State private var gallaryIdInput = ""
     @State private var Iter = 0
     @State private var mangas: [Gallery] = []
+    @StateObject var settings = insPopupSettings
 
     var body: some View {
-        VStack {
-            HStack(alignment: .top) {
-                TextField("Gallary ID or Link", text:$gallaryIdInput).padding([.top, .leading])
-                
-                Button(action: {
-                    if gallaryIdInput != "" {
-                        Download(id:gallaryIdInput)
-                    }
-                }) {
-                    Image(systemName:"arrow.down.circle")
-                        .padding()
-                }.padding([.top, .trailing])
-            }.padding(.bottom, 5.0)
-            Spacer()
-            
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach($mangas, id: \.self) { manga in
-                        HStack(alignment: .center) {
-                            ZStack {
-                                Image(nsImage: loadImageFromPath(path: manga.coverImage.wrappedValue)).resizable().frame(width: 100, height: 141).cornerRadius(5).clipped().aspectRatio(contentMode: .fill).shadow(radius: 10)
-                            }.padding(.leading, 12.0).padding([.bottom, .top], 6)
-                            VStack (alignment: .leading) {
-                                HStack {
-                                    Text(manga.name.wrappedValue).lineLimit(1).truncationMode(.middle).foregroundColor(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)).fontWeight(.bold)
-                                    Spacer()
-                                    Text(String(manga.date.wrappedValue)).padding([.leading, .trailing]).lineLimit(1).truncationMode(.middle).fontWeight(.ultraLight)
-                                }.padding(.top, 10)
-                                
-                                Text("ID: " + String(manga.id.wrappedValue)).lineLimit(1).truncationMode(.middle).fontWeight(.thin)
-                                Text("Pages: " + String(manga.totalPages.wrappedValue))
-
-                                Spacer()
-                                if !manga.wrappedValue.complete {
-                                    ProgressView(value: manga.wrappedValue.progress).progressViewStyle(DefaultProgressViewStyle())
-                                        .animation(.easeInOut(duration: 0.5), value: manga.wrappedValue.progress)
-                                }
-                                Spacer()
-                                HStack {
-                                    Spacer()
-                                    DeleteButton(mangas: $mangas, item: manga.wrappedValue)
-                                }
-                            }.frame(maxWidth: .infinity, alignment: .topLeading)
-                        }.background(VisualEffectView().ignoresSafeArea()).border(width: 1, edges: [.bottom], color: Color(red: 59/255, green: 59/255, blue: 59/255))
-                        /*.background(manga.order.wrappedValue % 2 == 0 ?  Color(red: 30/255, green: 30/255, blue: 31/255) : Color(red: 41/255, green: 41/255, blue: 42/255)).cornerRadius(manga.order.wrappedValue % 2 == 0 ? 0 : 15).padding([.leading, .trailing], 8.0)*/
-                    }
-                }
-            }.onAppear(perform: PrepareList).frame(maxWidth: .infinity).frame(maxWidth: .infinity).background(Color(red: 30/255, green: 30/255, blue: 31/255)).border(width: 1, edges: [.top, .bottom], color: Color(red: 59/255, green: 59/255, blue: 59/255))
-            HStack {
-                Text(String(GalOrder + 1)).padding([.leading])
+        ZStack {
+            VStack {
+                HStack(alignment: .top) {
+                    NeumorphicStyleTextField(textField: TextField("Input ID...", text: $gallaryIdInput), imageName: "safari.fill").padding([.top, .leading], 10).padding(.trailing, 4)
+                    Button(action:{downloadGal()}) { Image(systemName: "arrow.down").padding(10) }.buttonStyle(Serculant(cornerRadius: 6)).padding([.top, .trailing], 10)
+                }.padding(.bottom, 3.0)
                 Spacer()
-                Image(systemName: "swift").padding([.trailing])
-            }.padding([.bottom], 10)
+                
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach($mangas, id: \.self) { manga in
+                            HStack(alignment: .center) {
+                                ZStack {
+                                    Image(nsImage: loadImageFromPath(path: manga.coverImage.wrappedValue)).resizable().frame(width: 100, height: 141).cornerRadius(5).clipped().aspectRatio(contentMode: .fill).shadow(radius: 10)
+                                }.padding(.leading, 12.0).padding([.bottom, .top], 6)
+                                VStack (alignment: .leading) {
+                                    HStack {
+                                        Text(manga.name.wrappedValue).lineLimit(1).truncationMode(.middle).foregroundColor(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)).fontWeight(.bold).font(.system(size: 18))
+                                        Spacer()
+                                        Text(String(manga.date.wrappedValue)).padding([.leading, .trailing]).lineLimit(1).truncationMode(.middle).fontWeight(.ultraLight)
+                                    }.padding(.top, 10)
+                                    
+                                    Text("ID: " + String(manga.id.wrappedValue)).lineLimit(1).truncationMode(.middle).fontWeight(.thin)
+                                    Text("Pages: " + String(manga.totalPages.wrappedValue))
+                                    
+                                    Spacer()
+                                    if !manga.wrappedValue.complete {
+                                        ProgressView(value: manga.wrappedValue.progress).progressViewStyle(DefaultProgressViewStyle()).padding()
+                                    }
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        DeleteButton(mangas: $mangas, item: manga.wrappedValue)
+                                    }
+                                }.frame(maxWidth: .infinity, alignment: .topLeading)
+                            }
+                            .background(manga.order.wrappedValue % 2 == 0 ?  Color(red: 30/255, green: 30/255, blue: 31/255) : Color(red: 41/255, green: 41/255, blue: 42/255)).cornerRadius(manga.order.wrappedValue % 2 == 0 ? 0 : 5).padding([.leading, .trailing], 8.0)
+                        }.padding(.bottom, 8)
+                    }
+                }.onAppear(perform: PrepareList).frame(maxWidth: .infinity).frame(maxWidth: .infinity).background(Color(red: 30/255, green: 30/255, blue: 31/255)).border(width: 1, edges: [.top, .bottom], color: Color(red: 59/255, green: 59/255, blue: 59/255))
+                HStack {
+                    Text(String(GalOrder) + " Galleries").padding([.leading])
+                    Spacer()
+                    Text("v0.2a").fontWeight(SwiftUI.Font.Weight.ultraLight).padding([.trailing], 3)
+                    Image(systemName: "swift").padding([.trailing])
+                }.padding([.bottom], 10)
+            }.background(VisualEffectView().ignoresSafeArea()).border(width: 1, edges: [.bottom], color: Color(red: 59/255, green: 59/255, blue: 59/255)).onAppear(perform: FetchNode)
+        }.popup(isPresented: $settings.IsShowing) {
+            Toast()
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.top)
+                .isOpaque(true)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.5))
+                .autohideIn(2)
+        }.environmentObject(settings)
+    }
+    
+    struct PressActions: ViewModifier {
+        var onPress: () -> Void
+        var onRelease: () -> Void
+        func body(content: Content) -> some View {
+            content
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged({ _ in
+                            onPress()
+                        })
+                        .onEnded({ _ in
+                            onRelease()
+                        })
+                )
         }
     }
     
@@ -71,6 +95,15 @@ struct ContentView: View {
         }
 
         func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+        }
+    }
+    
+    func downloadGal() {
+        if gallaryIdInput != "" {
+            Download(id:gallaryIdInput)
+            print("Started downloading")
+        } else {
+            Notify(msg: "Please fill in the field.", type: .warning)
         }
     }
     
@@ -136,6 +169,7 @@ struct ContentView: View {
                         if let order = Int(orderS) {
                             if mangas[targetManga].totalPages == order {
                                 mangas[targetManga].complete = true
+                                Notify(msg: "Successfully downloaded: " + mangas[targetManga].name, type: BannerType.success)
                             }
                             mangas[targetManga].progress = Float(order) / Float(mangas[targetManga].totalPages)
                         }
@@ -147,6 +181,48 @@ struct ContentView: View {
             }
         }
         watcher.start()
+    }
+}
+
+struct Toast: View {
+    @EnvironmentObject var settings: PopupSettings
+    var body: some View {
+        HStack {
+            Text(settings.Content).fontWeight(.light).font(.system(size: 14)).padding(10).background(settings.type.tintColor).cornerRadius(15).shadow(radius: 10)
+        }.cornerRadius(10).background(Color.clear).ignoresSafeArea().padding()
+    }
+}
+
+class PopupSettings: ObservableObject {
+    @Published var Content = "Being added content"
+    @Published var type = BannerType.info
+    @Published var IsShowing = false
+    
+    func UpdateContent(msg: String, Bannertype: BannerType) {
+        Content = msg
+        type = Bannertype
+    }
+}
+
+var insPopupSettings = PopupSettings()
+
+enum BannerType {
+    case info
+    case warning
+    case success
+    case error
+
+    var tintColor: Color {
+        switch self {
+        case .info:
+            return Color(red: 67/255, green: 154/255, blue: 215/255)
+        case .success:
+            return Color.green
+        case .warning:
+            return Color.yellow
+        case .error:
+            return Color.red
+        }
     }
 }
 
@@ -192,6 +268,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .preferredColorScheme(.dark)
             .frame(width: 500.0, height: 700.0)
-            
     }
 }
