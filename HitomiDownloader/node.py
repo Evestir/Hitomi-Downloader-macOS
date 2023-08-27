@@ -69,7 +69,7 @@ def FetchName(id):
 def StartSelenium():
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
-    #options.add_argument('headless')
+    options.add_argument('headless')
     global driver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
